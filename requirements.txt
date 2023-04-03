@@ -1,1 +1,4 @@
-hh
+streamlit
+easyocr
+numpy
+pillow
