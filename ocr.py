@@ -4,10 +4,10 @@ from PIL import Image #Image Processing
 import numpy as np #Image Processing 
 
 #title
-st.title("Easy OCR - Extract Text from Images")
+st.title("Netspire OCR ")
 
 #subtitle
-st.markdown("## Optical Character Recognition - Using `easyocr`, `streamlit`")
+st.markdown("## Extract Text from Images ")
 
 st.markdown("")
 
@@ -44,7 +44,7 @@ if image is not None:
 else:
     st.write("Upload an Image")
 
-st.caption("Made with ❤️ by @1littlecoder")
+st.caption("Made with ❤️ by Hitesh SHarma")
 
 
 
