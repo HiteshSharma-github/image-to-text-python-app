@@ -1,53 +1,52 @@
-import easyocr as ocr  #OCR
-import streamlit as st  #Web App
-from PIL import Image #Image Processing
-import numpy as np #Image Processing 
+import easyocr as ocr
+import streamlit as st
+from PIL import Image, ImageEnhance, ImageFilter
+import numpy as np
 
-#title
-st.title("Netspire OCR ")
+# Title
+st.title("Netspire OCR")
 
-#subtitle
-st.markdown("## Extract Text from Images ")
+# Subtitle
+st.markdown("## Extract Text from Images")
 
 st.markdown("")
 
-#image uploader
-image = st.file_uploader(label = "Upload your image here",type=['png','jpg','jpeg'])
-
+# Image uploader
+image = st.file_uploader(label="Upload your image here", type=['png', 'jpg', 'jpeg'])
 
 @st.cache
-def load_model(): 
-    reader = ocr.Reader(['en'],model_storage_directory='.')
-    return reader 
+def load_model():
+    reader = ocr.Reader(['en'], model_storage_directory='.')
+    return reader
 
-reader = load_model() #load model
+reader = load_model()  # Load model
 
 if image is not None:
 
-    input_image = Image.open(image) #read image
-    st.image(input_image) #display image
+    input_image = Image.open(image)  # Read image
+
+    # Perform image processing
+    input_image = input_image.convert('L')  # Convert to grayscale
+    input_image = ImageEnhance.Contrast(input_image).enhance(2)  # Increase contrast
+    input_image = input_image.filter(ImageFilter.MedianFilter())  # Apply median filter
+    input_image = input_image.filter(ImageFilter.SHARPEN)  # Sharpen image
+    input_image = input_image.convert('RGB')  # Convert back to RGB
+
+    st.image(input_image)  # Display image
 
     with st.spinner("🤖 AI is at Work! "):
-        
-
         result = reader.readtext(np.array(input_image))
 
-        result_text = [] #empty list for results
-
+        result_text = []  # Empty list for results
 
         for text in result:
             result_text.append(text[1])
 
         st.write(result_text)
-    #st.success("Here you go!")
     st.balloons()
 else:
     st.write("Upload an Image")
+    
 url = "https://net-spire.netlify.app/"
 st.write("🔙 [Go Back](%s)" % url)
 st.caption("Made with ❤️ by Hitesh SHarma")
-
-
-
-
-
