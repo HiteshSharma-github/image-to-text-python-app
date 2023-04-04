@@ -43,7 +43,8 @@ if image is not None:
     st.balloons()
 else:
     st.write("Upload an Image")
-
+url = "https://net-spire.netlify.app/"
+st.write("🔙 [Go Back](%s)" % url)
 st.caption("Made with ❤️ by Hitesh SHarma")
 
 
