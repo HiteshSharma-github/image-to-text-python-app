@@ -47,6 +47,6 @@ if image is not None:
 else:
     st.write("Upload an Image")
     
-url = "https://net-spire.netlify.app/"
+url = "https://netspires.netlify.app"
 st.write("🔙 [Go Back](%s)" % url)
 st.caption("Made with ❤️ by Hitesh SHarma")
